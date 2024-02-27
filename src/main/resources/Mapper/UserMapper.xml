@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kc.oa.mapper.UserMapper">
+
+    <select id="Login" resultType="com.kc.oa.entity.User" parameterType="String">
+--         登录
+        select * from user where
+         userName=#{userName}
+        <if test="passWord!=null">
+            and
+            passWord=#{passWord}
+        </if>
+           and
+            status=1
+    </select>
+
+<!--添加人员-->
+    <insert id="insertUser" >
+        insert into user(id,userName,passWord,phone,sex,status,userToken,work,role,createdTime,updateTime)
+         values(#{id},#{userName},#{passWord},#{phone},#{sex},1,#{userToken},#{work},#{role},now(),now())
+    </insert>
+
+    <!--    修改人员-->
+    <update id="editUser">
+    update user
+    set passWord   = #{passWord},
+     userName = #{userName},
+        phone = #{phone},
+        sex      = #{sex},
+        work  = #{work},
+        role       = #{role}
+    where id = #{id};
+</update>
+
+<!--查询人员-->
+    <select id="selectList" resultType="com.kc.oa.entity.User" parameterType="String">
+
+        select * from user where
+        status=1
+        <if test="userName!=null">
+            and
+            userName like '%${userName}%'
+        </if>
+        ORDER BY createdTime DESC
+        limit #{current}, #{size}
+    </select>
+
+    <!--查询人员总数-->
+    <select id="selectListTotal"  parameterType="int">
+
+        select COUNT(*)  as total from user where
+        status=1
+        <if test="userName!=null">
+            and
+            userName like '%${userName}%'
+        </if>
+
+    </select>
+    <!--    删除人员-->
+    <update id="deleUser">
+    update user
+    set status   = 0
+    where id = #{id};
+</update>
+
+</mapper>

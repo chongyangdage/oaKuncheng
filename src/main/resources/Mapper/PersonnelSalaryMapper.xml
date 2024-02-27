@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kc.oa.mapper.PersonnelSalaryMapper">
+
+    <select id="selectPay" resultType="com.kc.oa.entity.PersonnelSalary" parameterType="String">
+--         查询工资
+        select * from personnelSalary where
+        <if test="userId==null">
+            years=#{years}
+
+        </if>
+
+        <if test="years==null">
+            userId=#{userId}
+        </if>
+        <if test="years!=null and userId!=null">
+            userId=#{userId} and  years=#{years}
+        </if>
+    </select>
+
+<!--添加工资-->
+    <insert id="insertPay" >
+        insert into personnelSalary(userName,day,dayPrice,userId,years,accountsPayable,actualPayment,createTime,updateTime)
+         values(#{userName},#{day},#{dayPrice},#{userId},#{years},#{accountsPayable},#{actualPayment},now(),now())
+    </insert>
+
+    <!--    修改工资-->
+    <update id="editPay">
+    update personnelSalary
+    set years   = #{years},
+     accountsPayable = #{accountsPayable},
+        actualPayment = #{actualPayment},
+
+    where id = #{id};
+</update>
+
+
+
+
+    <!--    删除人员-->
+    <delete id="delePay">
+ DELETE FROM personnelSalary WHERE id = #{id}
+</delete>
+
+</mapper>

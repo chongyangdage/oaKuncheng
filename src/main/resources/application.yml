@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/kc_java?&serverTimezone=Asia/Shanghai
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+# mybatis-plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+server:
+  port: 8099
+myapp:
+  fileUrl: F:\\tomcat\\apache-tomcat-9.0.56\\webapps\\imgs

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kc.oa.mapper.FileMapper">
+
+
+<!--添加文件-->
+    <insert id="insertFile" >
+        insert into file(url,name,fileId,originalName)
+         values(#{url},#{name},#{fileId},#{originalName})
+    </insert>
+
+
+<!--查询文件-->
+    <select id="selectFile" resultType="com.kc.oa.entity.Files">
+
+        select * from file where
+        fileId=#{fileId}
+
+
+    </select>
+
+    <!--    删除文件-->
+
+    <!-- Mapper.xml文件 -->
+
+        <delete id="deleteFile" >
+        DELETE FROM file WHERE id=#{id}
+    </delete>
+
+
+
+</mapper>
