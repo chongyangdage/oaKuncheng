@@ -7,6 +7,9 @@ import com.kc.oa.impl.FileServerImpl;
 import com.kc.oa.impl.UserServerImpl;
 import com.kc.oa.mapper.FileMapper;
 import com.kc.oa.server.FileServer;
+
+import cljs.tagged_literals.JSValue;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
@@ -29,6 +32,7 @@ public class UpDataController {
      */
     @Value("${myapp.fileUrl}")
     private String path;
+    @SuppressWarnings("rawtypes")
     @PostMapping("/uploadFile")
     public ResultUtil  uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("fileId") String fileId) throws IOException {
         ResultUtil result;

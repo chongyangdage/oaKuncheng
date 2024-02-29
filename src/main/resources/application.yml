@@ -12,5 +12,8 @@ mybatis-plus:
     map-underscore-to-camel-case: false
 server:
   port: 8099
+
+
+
 myapp:
   fileUrl: F:\\tomcat\\apache-tomcat-9.0.56\\webapps\\imgs
