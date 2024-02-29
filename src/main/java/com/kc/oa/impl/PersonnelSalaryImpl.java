@@ -24,7 +24,7 @@ public class PersonnelSalaryImpl implements PersonnelSalaryServer {
     }
 
     @Override
-    public List<PersonnelSalary> selectPay(int userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years) {
+    public List<PersonnelSalary> selectPay(String userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years) {
         List<PersonnelSalary> perList=  personnelSalaryMapper.selectPay(userId,years);
         return perList;
     }

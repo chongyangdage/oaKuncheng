@@ -10,19 +10,15 @@ import com.kc.oa.server.FileServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class UpDataController {
@@ -51,7 +47,6 @@ public class UpDataController {
         FileOutputStream out=null;
         InputStream in=null;
         try {
-
             myFile.createNewFile();
             out=new FileOutputStream(myFile);
             in=file.getInputStream();
@@ -70,8 +65,6 @@ public class UpDataController {
             fileServer.insertFile(newFie);
         List<Files> files = fileServer.selectFile(fileId);
             result=ResultUtil.success("查询成功",files);
-
-
         } catch (IOException e) {
             e.printStackTrace();
             result= ResultUtil.fail("查询失败",null);

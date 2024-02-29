@@ -14,7 +14,7 @@ public interface PersonnelSalaryServer {
 
 
     //查询工资
-    List <PersonnelSalary> selectPay(int userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years);
+    List <PersonnelSalary> selectPay(String userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years);
 
 
     //删除工资

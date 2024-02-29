@@ -14,7 +14,7 @@ public interface PersonnelSalaryMapper {
 
 
     //查询工资
-    List <PersonnelSalary> selectPay(@Param("userId") int userId,@Param("years") @DateTimeFormat(pattern = "yyyy-MM-dd") Date years);
+    List <PersonnelSalary> selectPay(@Param("userId") String userId,@Param("years") @DateTimeFormat(pattern = "yyyy-MM-dd") Date years);
 
 
     //删除工资

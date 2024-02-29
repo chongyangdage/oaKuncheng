@@ -16,6 +16,7 @@
         <if test="years!=null and userId!=null">
             userId=#{userId} and  years=#{years}
         </if>
+        ORDER BY years ASC
     </select>
 
 <!--添加工资-->
@@ -27,10 +28,11 @@
     <!--    修改工资-->
     <update id="editPay">
     update personnelSalary
-    set years   = #{years},
-     accountsPayable = #{accountsPayable},
-        actualPayment = #{actualPayment},
-
+    set years= #{years},
+        day= #{day},
+        dayPrice= #{dayPrice},
+        accountsPayable = #{accountsPayable},
+        actualPayment = #{actualPayment}
     where id = #{id};
 </update>
 

@@ -13,7 +13,7 @@ public class PersonnelSalary implements Serializable {
     private String day;
     private String dayPrice;
     private String userName;
-    private int userId;
+    private String userId;
 
     public String getUserName() {
         return userName;
@@ -23,7 +23,7 @@ public class PersonnelSalary implements Serializable {
         this.userName = userName;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM")
     private Date years;
     private String accountsPayable;
     private int actualPayment;
@@ -52,11 +52,11 @@ public class PersonnelSalary implements Serializable {
         this.dayPrice = dayPrice;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -36,13 +36,41 @@ public class PersonnelSalaryController {
 
 
     @GetMapping("/selectPay")
-    public ResultUtil selectPay(int userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years) {
+    public ResultUtil selectPay(String userId, @DateTimeFormat(pattern = "yyyy-MM-dd") Date years) {
         ResultUtil resultUtil;
         List<PersonnelSalary> personnelSalary1 =personnelSalaryServer.selectPay(userId,years);
         if(personnelSalary1!=null){
             resultUtil= ResultUtil.success("查询成功",personnelSalary1);
         }else{
             resultUtil=ResultUtil.fail("查询失败",personnelSalary1);
+        }
+        return resultUtil;
+    }
+
+
+
+    @GetMapping("/editPay")
+    public ResultUtil editPay(PersonnelSalary personnelSalary) {
+        ResultUtil resultUtil;
+        int personnelSalary1 =personnelSalaryServer.editPay(personnelSalary);
+        if(personnelSalary1==1){
+            resultUtil= ResultUtil.success("修改成功",personnelSalary1);
+        }else{
+            resultUtil=ResultUtil.fail("修改失败",personnelSalary1);
+        }
+        return resultUtil;
+    }
+
+
+
+    @GetMapping("/delePay")
+    public ResultUtil delePay(int id) {
+        ResultUtil resultUtil;
+        int personnelSalary1 =personnelSalaryServer.delePay(id);
+        if(personnelSalary1==1){
+            resultUtil= ResultUtil.success("删除成功",personnelSalary1);
+        }else{
+            resultUtil=ResultUtil.fail("删除失败",personnelSalary1);
         }
         return resultUtil;
     }
