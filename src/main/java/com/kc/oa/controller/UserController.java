@@ -1,12 +1,23 @@
 package com.kc.oa.controller;
 
+import clojure.lang.Obj;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.kc.oa.Response.JwtUtil;
 import com.kc.oa.Response.ResultUtil;
 import com.kc.oa.entity.User;
 import com.kc.oa.impl.UserServerImpl;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -14,8 +25,12 @@ public class UserController {
 
     @Autowired
     private UserServerImpl userServerImpl;
+    @Resource
+    private RedisTemplate redisTemplate;
+    // json处理的对象
+    ObjectMapper mapper = new ObjectMapper();
 
-/**
+/**new JdkSerializationRedisSerializer()
  * 用来处理请求地址映射的注解，可用于类或方法上。
  * 用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。
  */
@@ -35,11 +50,24 @@ public class UserController {
      
         ResultUtil resultUtil;
         int row=userServerImpl.insertUser(user);
+        try {
+//            String string = mapper.writeValueAsString(user);
+            // 保存到缓存中
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(row==1){
-            resultUtil=ResultUtil.success("添加成功",null);
+
+//            String str=(String) redisTemplate.opsForValue().get("user01094950-df69-11ee-aa0f-ebc38c599576");
+//           Object str1= JSONObject.parse(str);
+
+            resultUtil=ResultUtil.success("添加成功", null);
         }else{
             resultUtil=ResultUtil.fail("添加失败",null);
         }
+//        BoundValueOperations<String, String> boundValueOps = redisTemplate.boundValueOps("user"+user.getId());
+
         return resultUtil;
 
 
@@ -63,6 +91,23 @@ public class UserController {
 
     }
 
+
+
+    @GetMapping("/getUsersTotal")
+    public ResultUtil getUsersTotal() {
+
+        ResultUtil resultUtil;
+
+        int total=userServerImpl.selectListTotal(null);
+        if(total>=0){
+            resultUtil=ResultUtil.successTotal("查询成功",null,total);
+        }else{
+            resultUtil=ResultUtil.fail("查询失败",null);
+        }
+        return resultUtil;
+
+
+    }
 
 
     @GetMapping("/deleUser")

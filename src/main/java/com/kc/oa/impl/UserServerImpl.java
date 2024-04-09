@@ -1,15 +1,19 @@
 package com.kc.oa.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kc.oa.Response.JwtUtil;
 import com.kc.oa.Response.ResultUtil;
 import com.kc.oa.entity.User;
 import com.kc.oa.mapper.UserMapper;
 import com.kc.oa.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -40,7 +44,11 @@ public class UserServerImpl implements UserServer {
       String token= JwtUtil.generateToken(user);
       User userNow=user;
         user.setUserToken(token);
-      int row= userMapper.insertUser(user);
+
+        int row= userMapper.insertUser(user);
+
+
+
       System.out.print(row);
         return row;
 

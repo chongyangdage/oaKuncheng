@@ -34,6 +34,6 @@ public class FileServerImpl implements FileServer {
 
     @Override
     public int deleFile(String id) {
-        return 0;
+      return FileMapper.deleFile(id);
     }
 }

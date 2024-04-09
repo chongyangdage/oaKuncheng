@@ -23,7 +23,7 @@
 
     <!-- Mapper.xml文件 -->
 
-        <delete id="deleteFile" >
+        <delete id="deleFile" >
         DELETE FROM file WHERE id=#{id}
     </delete>
 

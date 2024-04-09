@@ -32,7 +32,7 @@ public class UpDataController {
      */
     @Value("${myapp.fileUrl}")
     private String path;
-    @SuppressWarnings("rawtypes")
+
     @PostMapping("/uploadFile")
     public ResultUtil  uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("fileId") String fileId) throws IOException {
         ResultUtil result;
@@ -91,5 +91,32 @@ public class UpDataController {
         long timestamp = System.currentTimeMillis();
         return timestamp + "_" + originalFilename;
     }
+        @PostMapping("/deleFile")
 
+    public ResultUtil deleFile(String id){
+        ResultUtil result;
+      int row=  fileServer.deleFile(id);
+      if(row==1){
+          result= ResultUtil.success("删除成功");
+      }else{
+          result= ResultUtil.fail("删除失败");
+      }
+        return result;
+    }
+
+
+
+
+    @PostMapping("/selectFile")
+
+    public ResultUtil selectFile(String fileId){
+        ResultUtil result;
+       List<Files> data=  fileServer.selectFile(fileId);
+        if(data!=null){
+            result= ResultUtil.success("查询成功",data);
+        }else{
+            result= ResultUtil.fail("查询失败");
+        }
+        return result;
+    }
 }
